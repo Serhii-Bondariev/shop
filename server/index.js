@@ -35,7 +35,7 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    app.listen(PORT, () => console.log(`Сервак їбаше на ${PORT} порту!`));
+    app.listen(PORT, () => console.log(`СЕРВЕР ПРАЦЮЄ НА ПОРТУ ${PORT}!`));
   } catch (e) {
     console.log(e);
   }
