@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react'
 
 const DevicePage = () => {
-    return ( 
+  return (
         <div>
-            DevicePage page
+            DevicePage
         </div>
-
-     );
+  )
 }
- 
-export default DevicePage;
+
+export default DevicePage

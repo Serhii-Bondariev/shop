@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
 const Basket = () => {
-    return ( 
+  return (
         <div>
             Basket page
         </div>
 
-     );
+  )
 }
- 
-export default Basket;
+
+export default Basket
