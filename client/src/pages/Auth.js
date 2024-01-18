@@ -21,12 +21,14 @@ const Auth = () => {
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                       {isLogin ?
                         <div>
-                            Ще нема акаунта? <NavLink to={REGISTRATION_ROUTE}>Зарееструйтесь!
-                        </NavLink>
+                            Ще нема акаунта? 
+                            <NavLink to={REGISTRATION_ROUTE}>Зарееструйтесь!
+                            </NavLink>
                         </div>
                         : 
                         <div>
-                            Вже є акаунт? <NavLink to={LOGIN_ROUTE}>Заходь!</NavLink>
+                            Вже є акаунт? 
+                            <NavLink to={LOGIN_ROUTE}>Заходь!</NavLink>
                         </div>
                         }
                       <Button className='mt-3  align-self-end' style={{width: 150}}
