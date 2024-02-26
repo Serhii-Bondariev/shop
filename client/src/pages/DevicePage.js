@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap'
 import ratingImg from '../assets/ratingImg.png'
+import noImage from '../assets/no-image.png'
 
 const DevicePage = () => {
   const device = {
@@ -31,7 +32,7 @@ const DevicePage = () => {
         <Container className='mt-3'>
           <Row>
             <Col md={4}>
-              <Image width={300} height={300} src={device.img || 'no-image.png' }/>
+              <Image width={300} height={300} src={device.img || {noImage} }/>
             </Col>
             <Col md={4}>
               <Row className="d-flex flex-column align-items-center">

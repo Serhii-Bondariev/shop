@@ -22,7 +22,9 @@ class UserController {
     try {
       const candidate = await User.findOne({ where: { email } });
       if (candidate) {
-        return next(ApiError.badRequest(`User with this ${email} already exists!`));
+        return next(
+          ApiError.badRequest(`User with this ${email} already exists!`)
+        );
       }
 
       const hashPassword = await bcrypt.hash(password, 5);
@@ -35,34 +37,32 @@ class UserController {
       return next(ApiError.internal("Registration error"));
     }
   }
-  
+
   async login(req, res, next) {
     const { email, password } = req.body;
     try {
-        const user = await User.findOne({ where: { email } });
-        if (!user) {
-            throw ApiError.internal(`User with email ${email} not found!`);
-        }
+      const user = await User.findOne({ where: { email } });
+      if (!user) {
+        throw ApiError.internal(`User with email ${email} not found!`);
+      }
 
-        let comparePassword = bcrypt.compareSync(password, user.password);
-        if (!comparePassword) {
-            throw ApiError.internal("Incorrect password");
-        }
+      let comparePassword = bcrypt.compareSync(password, user.password);
+      if (!comparePassword) {
+        throw ApiError.internal("Incorrect password");
+      }
 
-        const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ token }); 
+      const token = generateJwt(user.id, user.email, user.role);
+      return res.json({ token });
     } catch (error) {
-        console.error(error);  // Додайте вивід докладностей про помилку у консоль
-        return next(ApiError.internal("Login error"));
+      console.error(error); // Додайте вивід докладностей про помилку у консоль
+      return next(ApiError.internal("Login error"));
     }
-}
-
+  }
 
   async check(req, res, next) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role)
-    return res.json({token})
+    const token = generateJwt(req.user.id, req.user.email, req.user.role);
+    return res.json({ token });
   }
 }
 
 module.exports = new UserController();
-
