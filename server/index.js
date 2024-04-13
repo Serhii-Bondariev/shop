@@ -4,38 +4,41 @@ const sequelize = require("./db");
 const models = require("./models/models");
 const cors = require("cors");
 const uuid = require("uuid");
+const colors = require("colors");
 const fileUpload = require("express-fileupload");
 const router = require("./routes/index");
 const errorHandler = require("./middleware/ErrorHandlingMiddleware");
-const path = require('path')
+const path = require("path");
+const logger = require("morgan");
+const { User } = require("./models/models.js");
 
 const PORT = process.env.PORT || 5002;
 
 const app = express();
 
-// Додаємо middleware для обробки JSON-даних
+const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
 app.use(express.json());
-
-// Додаємо middleware для 
-app.use(express.static(path.resolve(__dirname, 'static')))
-
-// Додаємо middleware для доступу до завантаження файлів
+app.use(express.static(path.resolve(__dirname, "static")));
 app.use(fileUpload({}));
-
-// Додаємо middleware CORS для обробки CORS
 app.use(cors());
-
-// Додаємо маршрутизацію
 app.use("/api", router);
-
-// Додаємо middleware для обробки помилок
 app.use(errorHandler);
+app.use(logger("combined"));
+
+app.use(logger(formatsLogger));
 
 const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    app.listen(PORT, () => console.log(`СЕРВЕР ПРАЦЮЄ НА ПОРТУ ${PORT}!`));
+    app.listen(PORT, () =>
+      console.log(`СЕРВЕР ПРАЦЮЄ НА ПОРТУ ${PORT}!`.bgMagenta)
+    );
+
+    // Приклад виклику запиту до бази даних та відображення результатів у вигляді таблиці
+    const users = await User.findAll(); // Припустимо, що User - це ваша модель користувача
+    console.table(users.map((user) => user.toJSON())); // Відображення результатів у вигляді таблиці
   } catch (e) {
     console.log(e);
   }

@@ -8,7 +8,7 @@
 // const DeviceItem = ({device}) => {
 //     const navigate = useNavigate()
 //     console.log(navigate);
-//     return ( 
+//     return (
 //         <Col className="mt-3" onClick={() => navigate(DEVICE_ROUTE + '/' + device.id)}>
 //             <Card className="p-2 mt-3 " style={{width:150, cursor: 'pointer',}} border={'light-grey'}>
 //                 <Image alt="Image of device" width={150} height={150} src={device.img}/>
@@ -24,7 +24,7 @@
 //         </Col>
 //         );
 // }
- 
+
 // export default DeviceItem ;
 import React from 'react';
 import { Card, Col } from 'react-bootstrap';
@@ -56,7 +56,7 @@ const DeviceItem = ({ device }) => {
 
 DeviceItem.propTypes = {
   device: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     img: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
